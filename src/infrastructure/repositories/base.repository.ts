@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { database } from '../database/connection';
+import { PrismaClient } from "@prisma/client";
+import { database } from "../database/connection";
 
 export abstract class BaseRepository<T> {
   protected prisma: PrismaClient;
@@ -16,7 +16,7 @@ export abstract class BaseRepository<T> {
 
   async findById(id: string): Promise<T | null> {
     return this.prisma[this.model].findUnique({
-      where: { id }
+      where: { id },
     });
   }
 
@@ -27,13 +27,13 @@ export abstract class BaseRepository<T> {
   async update(id: string, data: any): Promise<T> {
     return this.prisma[this.model].update({
       where: { id },
-      data
+      data,
     });
   }
 
   async delete(id: string): Promise<T> {
     return this.prisma[this.model].delete({
-      where: { id }
+      where: { id },
     });
   }
-} 
+}
