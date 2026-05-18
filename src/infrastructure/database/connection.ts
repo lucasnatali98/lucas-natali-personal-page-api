@@ -1,11 +1,24 @@
 import { PrismaClient } from '@prisma/client';
+import dotenv from 'dotenv';
+
+dotenv.config()
 
 class DatabaseConnection {
   private static instance: DatabaseConnection;
   private prisma: PrismaClient;
 
   private constructor() {
-    this.prisma = new PrismaClient();
+    const databaseUrl = process.env.DATABASE_URL ?? null
+    if(!databaseUrl){
+      throw new Error('Não foi informado valor para <DATABASE_URL> no arquivo de configuração')
+    }
+    this.prisma = new PrismaClient({
+      datasources: {
+        db: {
+          url: databaseUrl,
+        },
+      },
+    });
   }
 
   public static getInstance(): DatabaseConnection {

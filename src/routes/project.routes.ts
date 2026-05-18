@@ -2,7 +2,7 @@ import { Router } from "express";
 import { container } from "../infrastructure/container";
 import { authMiddleware } from "../presentation/middlewares/auth.middleware";
 
-import { ProjectController } from "@/presentation/controllers/project.controller";
+import { ProjectController } from "../presentation/controllers/project.controller";
 
 const router = Router();
 const projectController =

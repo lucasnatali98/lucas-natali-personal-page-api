@@ -1,12 +1,13 @@
 {
-  "name": "blog-api",
+  "name": "ln-personal-page-api",
   "version": "1.0.0",
-  "description": "Blog API with newsletter functionality",
+  "description": "LN Personal Page API with newsletter and blog functionality",
   "main": "src/server.ts",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
+    "build": "npm run clean && tsc",
+    "start": "node dist/src/server.js",
+    "clean": "rm -rf dist",
     "prisma:generate": "npx prisma generate",
     "prisma:migrate": "npx prisma migrate-dev",
     "prisma:push": "npx prisma db push",
@@ -21,7 +22,7 @@
     "docker:down": "docker-compose down"
   },
   "keywords": [],
-  "author": "",
+  "author": "Lucas Natali",
   "license": "ISC",
   "dependencies": {
     "@opentelemetry/api": "^1.7.0",

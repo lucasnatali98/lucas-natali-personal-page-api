@@ -1,35 +1,46 @@
 services:
-  app:
-    build: .
+  ln-personal-page:
     ports:
       - "3000:3000"
+    container_name: ln-personal-page-api
+    image: ln-personal-page-api-image
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=postgresql://postgres:postgres@db:5433/personal-page-db?schema=public
+      - DATABASE_URL=postgresql://ln-personal-page:ln-personal-page@ln-personal-page-db:5433/personal-page-db?schema=public
       - JWT_SECRET=''
       - JWT_EXPIRES_IN=30000
     depends_on:
-      - db
+      - ln-personal-page-db
     networks:
-      - app-network
+      - ln-personal-page-network
+    
 
-  db:
-    image: postgres:latest
+  ln-personal-page-db:
+    image: ln-personal-page-postgres-image:17.5
+    container_name: ln-personal-page-postgres
+    restart: always
+    build:
+      context: ./docker/database/postgres
+      dockerfile: Dockerfile
     ports:
-      - "5433:5432"
+      - "5433:5433"
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=ln-personal-page
+      - POSTGRES_PASSWORD=ln-personal-page
       - POSTGRES_DB=personal-page-db
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ln_personal_page_volume:/var/lib/postgresql/data
     networks:
-      - app-network
+      - ln-personal-page-network
 
 
 volumes:
-  postgres_data:
+  ln_personal_page_volume:
+    driver: local
 
 networks:
-  app-network:
+  ln-personal-page-network:
     driver: bridge 

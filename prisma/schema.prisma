@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets   = ["native", "debian-openssl-1.1.x"]
 }
 
 datasource db {
@@ -46,7 +47,7 @@ model Newsletter {
   userId    String
   active    Boolean  @default(true)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model Comment {
@@ -57,7 +58,7 @@ model Comment {
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model Category {
@@ -66,7 +67,7 @@ model Category {
   description String?
   posts       Post[]
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime @default(now())
 }
 
 model Tag {
@@ -74,7 +75,7 @@ model Tag {
   name      String   @unique
   posts     Post[]
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 enum Role {
@@ -89,7 +90,7 @@ model Project {
   imageUrl    String
   url         String
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime @default(now())
 }
 
 model JobExperience {
@@ -102,5 +103,5 @@ model JobExperience {
   userId      String
   user        User      @relation(fields: [userId], references: [id])
   createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  updatedAt   DateTime  @default(now())
 }

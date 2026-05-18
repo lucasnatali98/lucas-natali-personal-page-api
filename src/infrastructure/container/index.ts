@@ -6,9 +6,9 @@ import { UserController } from "../../presentation/controllers/user.controller";
 import { PostController } from "../../presentation/controllers/post.controller";
 import { NewsletterController } from "../../presentation/controllers/newsletter.controller";
 import { JobExperienceRepository } from "../repositories/job-experience.repository";
-import { JobExperienceController } from "@/presentation/controllers/job-experience.controller";
+import { JobExperienceController } from "../../presentation/controllers/job-experience.controller";
 import { ProjectRepository } from "../repositories/project.repository";
-import { ProjectController } from "@/presentation/controllers/project.controller";
+import { ProjectController } from "../../presentation/controllers/project.controller";
 
 // Register repositories
 container.registerSingleton("UserRepository", UserRepository);

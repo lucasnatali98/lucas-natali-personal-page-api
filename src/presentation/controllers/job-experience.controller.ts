@@ -1,7 +1,7 @@
-import { JobExperienceRepository } from "@/infrastructure/repositories/job-experience.repository";
 import { injectable, inject } from "tsyringe";
 import { BaseController } from "./base.controller";
 import { Request, Response } from "express";
+import { JobExperienceRepository } from "../../infrastructure/repositories/job-experience.repository";
 
 @injectable()
 export class JobExperienceController extends BaseController {
