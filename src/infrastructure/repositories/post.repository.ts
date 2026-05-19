@@ -16,11 +16,13 @@ export class PostRepository extends BaseRepository<Post> {
         new Post({
           title: post.title,
           content: post.content,
+          excerpt: post.excerpt,
+          readTime: post.readTime,
           authorId: post.authorId,
-          categories: [],
           published: post.published,
           slug: post.slug,
-          tags: [],
+          categoryId: post.categoryId,
+          tagId: post.tagId,
         })
     );
   }

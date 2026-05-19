@@ -1,18 +1,23 @@
 export class JobExperience {
   constructor(
     public id: string,
-    public companyName: string,
-    public jobTitle: string,
+    public company: string,
+    public position: string,
+    public location: string,
     public startDate: Date,
     public endDate: Date | null,
-    public description: string
+    public description: string,
+    public tags: string[],
+    public userId?: string | null
   ) {}
 
-  getDuration(): string {
-    const start = this.startDate;
-    const end = this.endDate || new Date();
-    const duration = Math.abs(end.getTime() - start.getTime());
-    const days = Math.ceil(duration / (1000 * 3600 * 24));
-    return `${days} days`;
+  get current(): boolean {
+    return this.endDate === null;
+  }
+
+  getPeriod(): string {
+    const start = this.startDate.getFullYear();
+    const end = this.endDate ? this.endDate.getFullYear().toString() : "Presente";
+    return `${start} — ${end}`;
   }
 }

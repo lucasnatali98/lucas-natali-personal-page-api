@@ -53,8 +53,6 @@ const newsletterController = container.resolve<NewsletterController>(
 
 router.post(
   "/subscribe",
-  authMiddleware,
-  adminMiddleware,
   newsletterController.subscribe.bind(newsletterController)
 );
 

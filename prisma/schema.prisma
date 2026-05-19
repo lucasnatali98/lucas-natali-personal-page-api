@@ -28,6 +28,8 @@ model Post {
   id         String    @id @default(uuid())
   title      String
   content    String
+  excerpt    String?
+  readTime   String?
   slug       String    @unique
   published  Boolean   @default(false)
   authorId   String
@@ -44,7 +46,8 @@ model Post {
 model Newsletter {
   id        String   @id @default(uuid())
   email     String   @unique
-  userId    String
+  name      String?
+  userId    String?
   active    Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -87,8 +90,12 @@ model Project {
   id          String   @id @default(uuid())
   name        String
   description String
-  imageUrl    String
-  url         String
+  imageUrl    String?
+  url         String?
+  tag         String
+  label       String
+  cover       String
+  techs       String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
 }
@@ -97,11 +104,13 @@ model JobExperience {
   id          String    @id @default(uuid())
   company     String
   position    String
+  location    String
   startDate   DateTime
   endDate     DateTime?
   description String
-  userId      String
-  user        User      @relation(fields: [userId], references: [id])
+  tags        String[]
+  userId      String?
+  user        User?     @relation(fields: [userId], references: [id])
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @default(now())
 }

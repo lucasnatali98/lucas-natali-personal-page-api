@@ -1,14 +1,39 @@
-import { Router, Request, Response } from "express";
-import { container } from "infrastructure/container";
-import { NewsletterController } from "presentation/controllers/newsletter.controller";
+import { Router } from "express";
+import { container } from "../infrastructure/container";
+import { authMiddleware } from "../presentation/middlewares/auth.middleware";
+import { JobExperienceController } from "../presentation/controllers/job-experience.controller";
 
-const jobExperienceRoutes = Router();
-
-const newsletterController = container.resolve<NewsletterController>(
-  "NewsletterController"
+const router = Router();
+const jobExperienceController = container.resolve<JobExperienceController>(
+  "JobExperienceController"
 );
 
-jobExperienceRoutes.get("/find-all", async (req: Request, res: Response) => {});
-jobExperienceRoutes.post("/create", async (req: Request, res: Response) => {});
+router.get(
+  "/find-all",
+  jobExperienceController.findAll.bind(jobExperienceController)
+);
 
-export { jobExperienceRoutes };
+router.get(
+  "/find-by-id/:id",
+  jobExperienceController.findById.bind(jobExperienceController)
+);
+
+router.post(
+  "/create",
+  authMiddleware,
+  jobExperienceController.create.bind(jobExperienceController)
+);
+
+router.patch(
+  "/update/:id",
+  authMiddleware,
+  jobExperienceController.update.bind(jobExperienceController)
+);
+
+router.delete(
+  "/delete/:id",
+  authMiddleware,
+  jobExperienceController.delete.bind(jobExperienceController)
+);
+
+export { router as jobExperienceRoutes };

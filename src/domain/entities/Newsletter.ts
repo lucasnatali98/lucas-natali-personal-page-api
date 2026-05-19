@@ -16,6 +16,10 @@ export class Newsletter implements INewsletter {
 
   constructor(props: Omit<INewsletter, 'id' | 'createdAt' | 'updatedAt'>) {
     Object.assign(this, props);
+    this.email = props.email;
+    this.userId = props.userId;
+    this.active = props.active;
+    this.id = crypto.randomUUID(); //TODO: avaliar se isso faz sentido
     this.createdAt = new Date();
     this.updatedAt = new Date();
   }
